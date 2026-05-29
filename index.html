@@ -174,6 +174,15 @@
             cursor: pointer;
         }
 
+        .bitis-mesaji {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         @media (max-width: 550px) {
             .container {
                 padding: 1.5rem;
@@ -289,7 +298,7 @@
             };
         }
 
-        // KAÇAN HAYIR BUTONU - HİÇ POPUP YOK, SADECE KAÇIYOR
+        // KAÇAN HAYIR BUTONU
         if (isim && soru) {
             const noBtn = document.getElementById('hayirButton');
             const yesBtn = document.getElementById('evetButton');
@@ -362,7 +371,7 @@
                 if (touch) escapeFromCursor(touch.clientX, touch.clientY);
             });
             
-            // Hayır butonuna tıklanırsa sadece kaç, popup YOK!
+            // Hayır butonuna tıklanırsa sadece kaç
             noBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const containerRect = container.getBoundingClientRect();
@@ -372,13 +381,17 @@
                 noBtn.style.top = randomTop + 'px';
             });
             
+            // EVET BUTONU - Sadece cevabı göster, bitir. Yeni link üretme özelliği YOK!
             yesBtn.addEventListener('click', () => {
                 const cevapText = decodeURIComponent(cevap);
                 const panel = document.getElementById('questionPanel');
                 panel.innerHTML = `
-                    <h1 style="color:#2b9348; font-size: 2rem;">🎉 ${cevapText} 🎉</h1>
-                    <button onclick="window.location.href=window.location.href.split('?')[0]" style="margin-top:30px; width:auto; padding:12px 24px;">🔁 Yeni Sürpriz Hazırla</button>
+                    <div class="bitis-mesaji">
+                        <h1 style="color:#2b9348; font-size: 2rem;">🎉 ${cevapText} 🎉</h1>
+                        <p style="margin-top: 20px; font-size: 1.2rem; color:#c9184a;">❤️ Teşekkür ederim! ❤️</p>
+                    </div>
                 `;
+                // Butonlar tamamen gitti, işlem bitti.
             });
         }
     </script>
