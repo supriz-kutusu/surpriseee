@@ -159,7 +159,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 4px 0 #1f6e38;
+            cursor: pointer;
         }
 
         .no-btn {
@@ -171,19 +171,7 @@
             justify-content: center;
             gap: 8px;
             position: relative;
-            transition: none;
-            box-shadow: 0 4px 0 #9e2a2f;
-        }
-
-        .yes-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #1f6e38;
-        }
-
-        footer {
-            margin-top: 20px;
-            font-size: 11px;
-            color: #bd7f96;
+            cursor: pointer;
         }
 
         @media (max-width: 550px) {
@@ -205,7 +193,7 @@
     <!-- Link Oluşturma Paneli -->
     <div id="creatorPanel" class="container">
         <h1>💘 Sürpriz Hazırlık 💘</h1>
-        <p class="sub" style="color:#6b2e3e; margin-bottom:1.8rem;">Sevgiline "hayır" diyemeyeceği bir soru sor!</p>
+        <p style="color:#6b2e3e; margin-bottom:1.8rem;">Sevgiline "hayır" diyemeyeceği bir soru sor!</p>
         <div class="form-group">
             <label>👤 Onun ismi:</label>
             <input type="text" id="personName" placeholder="Örn: Melis, Arda" value="Aşkım">
@@ -228,7 +216,7 @@
         </div>
     </div>
 
-    <!-- Soru Paneli (Linke tıklayan kişinin gördüğü) -->
+    <!-- Soru Paneli -->
     <div id="questionPanel" class="container" style="display: none;">
         <h1 id="displayQuestion"></h1>
         <div class="question-buttons">
@@ -251,20 +239,17 @@
         }
         setInterval(createHeart, 90);
 
-        // URL parametrelerini oku
         const params = new URLSearchParams(window.location.search);
         const isim = params.get('isim');
         const soru = params.get('soru');
         const cevap = params.get('cevap');
 
-        // Eğer parametre varsa soru panelini göster
         if (isim && soru) {
             document.getElementById('creatorPanel').style.display = 'none';
             document.getElementById('questionPanel').style.display = 'block';
             document.getElementById('displayQuestion').innerHTML = `${decodeURIComponent(isim)}<br>${decodeURIComponent(soru)}`;
         }
 
-        // Link oluşturma fonksiyonu
         function buildLink() {
             let name = document.getElementById('personName').value.trim();
             let q = document.getElementById('questionText').value.trim();
@@ -276,7 +261,6 @@
             return `${base}?isim=${encodeURIComponent(name)}&soru=${encodeURIComponent(q)}&cevap=${encodeURIComponent(a)}`;
         }
 
-        // Link oluşturma butonu
         const genBtn = document.getElementById('generateLinkBtn');
         if (genBtn) {
             genBtn.onclick = () => {
@@ -287,7 +271,6 @@
             };
         }
 
-        // WhatsApp butonu
         const waBtn = document.getElementById('whatsappShareBtn');
         if (waBtn) {
             waBtn.onclick = () => {
@@ -296,7 +279,6 @@
             };
         }
 
-        // Instagram butonu
         const igBtn = document.getElementById('instagramShareBtn');
         if (igBtn) {
             igBtn.onclick = () => {
@@ -307,24 +289,21 @@
             };
         }
 
-        // KAÇAN HAYIR BUTONU (sürekli kaçış, popup yok)
+        // KAÇAN HAYIR BUTONU - HİÇ POPUP YOK, SADECE KAÇIYOR
         if (isim && soru) {
             const noBtn = document.getElementById('hayirButton');
             const yesBtn = document.getElementById('evetButton');
             const container = document.querySelector('.container');
             
-            // Butonları absolute yap
             noBtn.style.position = 'absolute';
-            noBtn.style.transition = 'left 0.05s linear, top 0.05s linear';
+            noBtn.style.transition = 'left 0.03s linear, top 0.03s linear';
             
-            // Başlangıç pozisyonu: Evet butonunun sağına
             function setInitialPosition() {
                 const yesRect = yesBtn.getBoundingClientRect();
                 const containerRect = container.getBoundingClientRect();
                 let leftPos = yesRect.right + 20;
                 let topPos = yesRect.top;
                 
-                // Sınırları kontrol et
                 const maxLeft = containerRect.right - noBtn.offsetWidth - 10;
                 const minLeft = containerRect.left + 10;
                 const maxTop = containerRect.bottom - noBtn.offsetHeight - 10;
@@ -342,27 +321,23 @@
             setTimeout(setInitialPosition, 50);
             window.addEventListener('resize', setInitialPosition);
             
-            // Kaçış fonksiyonu - popup YOK, sadece kaçış
             function escapeFromCursor(clientX, clientY) {
-                if (!noBtn || noBtn.style.display === 'none') return;
+                if (!noBtn) return;
                 
                 const btnRect = noBtn.getBoundingClientRect();
                 const btnCenterX = btnRect.left + btnRect.width / 2;
                 const btnCenterY = btnRect.top + btnRect.height / 2;
                 const distance = Math.hypot(clientX - btnCenterX, clientY - btnCenterY);
                 
-                // 100px yaklaşırsa kaç
                 if (distance < 100) {
                     const angle = Math.atan2(clientY - btnCenterY, clientX - btnCenterX);
-                    // Kaçış miktarı - ne kadar yakınsa o kadar hızlı kaçsın
-                    const escapePower = Math.min(180, 100 + (100 - distance));
+                    const escapePower = Math.min(200, 120 + (100 - distance));
                     const escapeX = Math.cos(angle) * escapePower;
                     const escapeY = Math.sin(angle) * escapePower;
                     
                     let newLeft = btnRect.left - escapeX;
                     let newTop = btnRect.top - escapeY;
                     
-                    // Container sınırları (ekrandan çıkmasın, kaybolmasın)
                     const containerRect = container.getBoundingClientRect();
                     const minX = containerRect.left + 5;
                     const maxX = containerRect.right - noBtn.offsetWidth - 5;
@@ -377,34 +352,19 @@
                 }
             }
             
-            // Mouse takibi
-            const onMouseMove = (e) => {
-                escapeFromCursor(e.clientX, e.clientY);
-            };
-            
-            // Dokunmatik takibi
-            const onTouchMove = (e) => {
+            document.addEventListener('mousemove', (e) => escapeFromCursor(e.clientX, e.clientY));
+            document.addEventListener('touchmove', (e) => {
                 const touch = e.touches[0];
-                if (touch) {
-                    escapeFromCursor(touch.clientX, touch.clientY);
-                }
-            };
-            
-            const onTouchStart = (e) => {
+                if (touch) escapeFromCursor(touch.clientX, touch.clientY);
+            });
+            document.addEventListener('touchstart', (e) => {
                 const touch = e.touches[0];
-                if (touch) {
-                    escapeFromCursor(touch.clientX, touch.clientY);
-                }
-            };
+                if (touch) escapeFromCursor(touch.clientX, touch.clientY);
+            });
             
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('touchmove', onTouchMove);
-            document.addEventListener('touchstart', onTouchStart);
-            
-            // Hayır butonuna tıklama girişimi - sadece kaç, popup yok
+            // Hayır butonuna tıklanırsa sadece kaç, popup YOK!
             noBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Tıklayınca anında rastgele bir yere kaçsın
                 const containerRect = container.getBoundingClientRect();
                 const randomLeft = containerRect.left + 10 + Math.random() * (containerRect.width - noBtn.offsetWidth - 20);
                 const randomTop = containerRect.top + 10 + Math.random() * (containerRect.height - noBtn.offsetHeight - 20);
@@ -412,7 +372,6 @@
                 noBtn.style.top = randomTop + 'px';
             });
             
-            // Evet butonu - cevabı göster
             yesBtn.addEventListener('click', () => {
                 const cevapText = decodeURIComponent(cevap);
                 const panel = document.getElementById('questionPanel');
