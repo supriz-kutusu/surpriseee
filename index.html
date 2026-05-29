@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Aşk Sürprizi | Evet Demek Zorundasın ❤️</title>
+    <title>Aşk Sürprizi ❤️</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* Mobilde seçim engeli */
         }
 
         body {
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(145deg, #ffe6f0 0%, #ffccdd 100%);
             min-height: 100vh;
             display: flex;
@@ -21,10 +20,8 @@
             align-items: center;
             position: relative;
             overflow-x: hidden;
-            touch-action: pan-y; /* Dikey kaydırmaya izin ver, yatay engel */
         }
 
-        /* Uçuşan Kalpler */
         .heart {
             position: fixed;
             color: #ff3366;
@@ -46,30 +43,22 @@
             }
         }
 
-        /* Ana Container */
         .container {
             background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(2px);
             border-radius: 48px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
-            padding: 2rem 1.8rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
             width: 90%;
             max-width: 500px;
             text-align: center;
             z-index: 10;
-            transition: all 0.2s ease;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #c9184a;
-            margin-bottom: 0.5rem;
-        }
-
-        .sub {
-            color: #6b2e3e;
-            margin-bottom: 1.8rem;
-            font-weight: 500;
+            margin-bottom: 2rem;
+            line-height: 1.4;
         }
 
         .form-group {
@@ -82,7 +71,6 @@
             color: #a13e5c;
             display: block;
             margin-bottom: 6px;
-            font-size: 0.9rem;
         }
 
         input {
@@ -92,13 +80,11 @@
             border-radius: 60px;
             font-size: 1rem;
             outline: none;
-            transition: 0.2s;
             background: white;
         }
 
         input:focus {
             border-color: #ff4d6d;
-            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.2);
         }
 
         button {
@@ -110,15 +96,8 @@
             border-radius: 60px;
             color: white;
             cursor: pointer;
-            transition: 0.2s;
             width: 100%;
             margin-top: 12px;
-            box-shadow: 0 6px 0 #a11d3b;
-        }
-
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0 3px 0 #a11d3b;
         }
 
         .share-area {
@@ -136,7 +115,6 @@
             font-size: 0.75rem;
             word-break: break-all;
             color: #c9184a;
-            font-weight: bold;
             margin: 10px 0;
             border: 1px solid #ffb3c6;
             cursor: pointer;
@@ -150,66 +128,61 @@
         }
 
         .social-btn {
-            background: #2c3e50;
             padding: 10px 0;
             font-size: 0.9rem;
             width: 45%;
-            display: inline-block;
-            box-shadow: none;
             margin-top: 0;
         }
 
         .whatsapp {
             background: #25D366;
-            box-shadow: 0 4px 0 #128C7E;
         }
 
         .instagram {
             background: #d62976;
-            box-shadow: 0 4px 0 #8a1c4e;
         }
 
-        /* SORU PANELİ BUTONLARI */
         .question-buttons {
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-top: 35px;
+            margin-top: 20px;
             position: relative;
-            min-height: 100px;
+            min-height: 80px;
         }
 
         .yes-btn {
             background: #2b9348;
-            box-shadow: 0 6px 0 #1f6e38;
             width: 130px;
             font-size: 1.5rem;
-            transition: 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 0 #1f6e38;
         }
 
         .no-btn {
             background: #e63946;
-            box-shadow: 0 6px 0 #9e2a2f;
             width: 130px;
             font-size: 1.5rem;
-            position: relative;  /* JS ile absolute olacak ama köken relative */
-            transition: top 0.08s ease, left 0.08s ease;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            transition: none;
+            box-shadow: 0 4px 0 #9e2a2f;
         }
 
-        /* evet sonrası tebrik kartı */
-        .cevap-karti {
-            animation: pulse 0.5s ease;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .yes-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #1f6e38;
         }
 
         footer {
             margin-top: 20px;
-            font-size: 12px;
+            font-size: 11px;
             color: #bd7f96;
         }
 
@@ -219,7 +192,6 @@
             }
             .question-buttons {
                 gap: 15px;
-                flex-wrap: wrap;
             }
             .no-btn, .yes-btn {
                 width: 120px;
@@ -230,289 +202,226 @@
 </head>
 <body>
 
-    <!-- BAŞLANGIÇ PANELİ (Link oluşturma) -->
+    <!-- Link Oluşturma Paneli -->
     <div id="creatorPanel" class="container">
         <h1>💘 Sürpriz Hazırlık 💘</h1>
-        <p class="sub">Sevgiline / flörtüne "hayır" diyemeyeceği bir soru hazırla</p>
+        <p class="sub" style="color:#6b2e3e; margin-bottom:1.8rem;">Sevgiline "hayır" diyemeyeceği bir soru sor!</p>
         <div class="form-group">
-            <label>👤 Onun ismi (veya takma ad):</label>
-            <input type="text" id="personName" placeholder="Örn: Melis, Arda, Zeynep" value="Aşkım">
+            <label>👤 Onun ismi:</label>
+            <input type="text" id="personName" placeholder="Örn: Melis, Arda" value="Aşkım">
         </div>
         <div class="form-group">
-            <label>❓ Ne sormak istiyorsun?:</label>
-            <input type="text" id="questionText" placeholder="Örn: Benimle sevgili olur musun? 💍" value="Benimle çıkar mısın?">
+            <label>❓ Soru:</label>
+            <input type="text" id="questionText" placeholder="Örn: Benimle çıkar mısın?" value="Benimle çıkar mısın?">
         </div>
         <div class="form-group">
-            <label>✅ "Evet" dediğinde ne cevap vereceksin?:</label>
-            <input type="text" id="answerText" placeholder="Örn: Çok mutlu ettin! Seni seviyorum ❤️" value="İşte bu yüzden sana deli oluyorum! 🎉">
+            <label>✅ Evet cevabı:</label>
+            <input type="text" id="answerText" placeholder="Mutlu cevabın" value="İşte bu yüzden sana deli oluyorum! 🎉">
         </div>
-        <button id="generateLinkBtn">✨ Sihirli Linki Oluştur ✨</button>
+        <button id="generateLinkBtn">✨ Sihirli Link Oluştur ✨</button>
         <div id="shareBox" class="share-area">
-            <p style="margin-bottom: 8px;">🔗 Link hazır! Tıkla kopyala, sonra paylaş:</p>
             <div id="generatedLink" class="share-link">Link oluşacak</div>
             <div class="social-buttons">
-                <button id="whatsappShareBtn" class="social-btn whatsapp">📱 WhatsApp ile Paylaş</button>
-                <button id="instagramShareBtn" class="social-btn instagram">📸 Instagram (Linki kopyala)</button>
+                <button id="whatsappShareBtn" class="social-btn whatsapp">📱 WhatsApp</button>
+                <button id="instagramShareBtn" class="social-btn instagram">📸 Instagram</button>
             </div>
-            <small>🔁 Linki WhatsApp, DM veya hikayenden gönderebilirsin</small>
         </div>
-        <footer>💞 Kimse hayır diyemeyecek, buton kaçıyor ama kaybolmuyor!</footer>
     </div>
 
-    <!-- SORU PANELİ (Linke tıklayan kişi bunu görür) -->
+    <!-- Soru Paneli (Linke tıklayan kişinin gördüğü) -->
     <div id="questionPanel" class="container" style="display: none;">
-        <h1 id="displayQuestion">Soru buraya gelecek</h1>
+        <h1 id="displayQuestion"></h1>
         <div class="question-buttons">
             <button id="evetButton" class="yes-btn">✅ EVET</button>
             <button id="hayirButton" class="no-btn">❌ HAYIR</button>
         </div>
-        <footer>❤️ Fareyi veya parmağını HAYIR'a yaklaştırma, kaçar ama hep burada! :)</footer>
     </div>
 
     <script>
-        // ----- UÇAN KALPLER (performanslı) -----
-        function createFloatingHeart() {
+        // Uçan kalpler
+        function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
-            heart.innerHTML = ['❤️', '💖', '💗', '💘', '💝'][Math.floor(Math.random() * 5)];
+            heart.innerHTML = ['❤️', '💖', '💗', '💘'][Math.floor(Math.random() * 4)];
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.fontSize = (Math.random() * 20 + 18) + 'px';
             heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createFloatingHeart, 90);
+        setInterval(createHeart, 90);
 
-        // ----- URL PARAMETRELERİNİ OKU -----
-        const urlParams = new URLSearchParams(window.location.search);
-        const isimParam = urlParams.get('isim');
-        const soruParam = urlParams.get('soru');
-        const cevapParam = urlParams.get('cevap');
+        // URL parametrelerini oku
+        const params = new URLSearchParams(window.location.search);
+        const isim = params.get('isim');
+        const soru = params.get('soru');
+        const cevap = params.get('cevap');
 
-        // Eğer parametreler varsa -> Soru panelini göster
-        if (isimParam && soruParam) {
+        // Eğer parametre varsa soru panelini göster
+        if (isim && soru) {
             document.getElementById('creatorPanel').style.display = 'none';
-            const questionPanel = document.getElementById('questionPanel');
-            questionPanel.style.display = 'block';
-            
-            const soruMetni = `${decodeURIComponent(isimParam)} ${decodeURIComponent(soruParam)}`;
-            document.getElementById('displayQuestion').innerText = soruMetni;
+            document.getElementById('questionPanel').style.display = 'block';
+            document.getElementById('displayQuestion').innerHTML = `${decodeURIComponent(isim)}<br>${decodeURIComponent(soru)}`;
         }
 
-        // ---------- LİNK OLUŞTURMA VE PAYLAŞIM ----------
-        const generateBtn = document.getElementById('generateLinkBtn');
-        const shareBox = document.getElementById('shareBox');
-        const generatedLinkDiv = document.getElementById('generatedLink');
-        
-        function buildShareLink() {
+        // Link oluşturma fonksiyonu
+        function buildLink() {
             let name = document.getElementById('personName').value.trim();
-            let question = document.getElementById('questionText').value.trim();
-            let answer = document.getElementById('answerText').value.trim();
-            
-            if(name === "") name = "Aşkım";
-            if(question === "") question = "Benimle çıkar mısın?";
-            if(answer === "") answer = "Harika! Seni seviyorum ❤️";
-            
-            const baseUrl = window.location.href.split('?')[0];
-            const encodedName = encodeURIComponent(name);
-            const encodedQuestion = encodeURIComponent(question);
-            const encodedAnswer = encodeURIComponent(answer);
-            return `${baseUrl}?isim=${encodedName}&soru=${encodedQuestion}&cevap=${encodedAnswer}`;
+            let q = document.getElementById('questionText').value.trim();
+            let a = document.getElementById('answerText').value.trim();
+            if (name === "") name = "Aşkım";
+            if (q === "") q = "Benimle çıkar mısın?";
+            if (a === "") a = "Harika! Seni seviyorum ❤️";
+            const base = window.location.origin + window.location.pathname;
+            return `${base}?isim=${encodeURIComponent(name)}&soru=${encodeURIComponent(q)}&cevap=${encodeURIComponent(a)}`;
         }
-        
-        generateBtn.addEventListener('click', () => {
-            const link = buildShareLink();
-            generatedLinkDiv.innerText = link;
-            shareBox.style.display = 'block';
-            // Otomatik panoya kopyala
-            navigator.clipboard.writeText(link).then(() => {
-                generatedLinkDiv.style.backgroundColor = "#e0ffe0";
-                setTimeout(() => generatedLinkDiv.style.backgroundColor = "white", 500);
-            }).catch(() => alert("Linki manuel kopyala: " + link));
-        });
-        
-        // Linke tıklayınca kopyalama
-        generatedLinkDiv.addEventListener('click', () => {
-            const link = generatedLinkDiv.innerText;
-            navigator.clipboard.writeText(link);
-            generatedLinkDiv.innerText = "✅ Kopyalandı!";
-            setTimeout(() => {
-                generatedLinkDiv.innerText = link;
-            }, 1500);
-        });
-        
-        // WhatsApp paylaşımı
-        document.getElementById('whatsappShareBtn').addEventListener('click', () => {
-            const link = buildShareLink();
-            const text = encodeURIComponent(`🎁 Sana özel bir sürprizim var! Buraya tıkla ve hayır deme şansın yok 😉👇\n${link}`);
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-        });
-        
-        // Instagram için direkt paylaşım API'si yok, linki kopyalayıp yönlendir
-        document.getElementById('instagramShareBtn').addEventListener('click', () => {
-            const link = buildShareLink();
-            navigator.clipboard.writeText(link);
-            alert("🔁 Link kopyalandı! Şimdi Instagram'a git, Hikaye veya DM'den yapıştırarak gönder.");
-            window.open('https://www.instagram.com', '_blank');
-        });
-        
-        // ---------- HAYIR BUTONU KAÇMA MEKANİZMASI (Fare / Parmak) ----------
-        // Bu kısım sadece questionPanel aktif olduğunda çalışacak. Dinamik kontrol.
-        let hayirButton = null;
-        let evetButton = null;
-        let activeQuestionPanel = false;
-        
-        // Her an butonları yakalamak için gözlemci veya interval, ama panel gösterildiğinde zaten butonlar var.
-        function initEscapeButton() {
-            hayirButton = document.getElementById('hayirButton');
-            evetButton = document.getElementById('evetButton');
-            if (!hayirButton) return;
+
+        // Link oluşturma butonu
+        const genBtn = document.getElementById('generateLinkBtn');
+        if (genBtn) {
+            genBtn.onclick = () => {
+                const link = buildLink();
+                document.getElementById('generatedLink').innerText = link;
+                document.getElementById('shareBox').style.display = 'block';
+                navigator.clipboard.writeText(link);
+            };
+        }
+
+        // WhatsApp butonu
+        const waBtn = document.getElementById('whatsappShareBtn');
+        if (waBtn) {
+            waBtn.onclick = () => {
+                const link = buildLink();
+                window.open(`https://wa.me/?text=${encodeURIComponent('🎁 Sana özel sürpriz! 🎁\n' + link)}`, '_blank');
+            };
+        }
+
+        // Instagram butonu
+        const igBtn = document.getElementById('instagramShareBtn');
+        if (igBtn) {
+            igBtn.onclick = () => {
+                const link = buildLink();
+                navigator.clipboard.writeText(link);
+                alert("✅ Link kopyalandı! Instagram DM veya hikayenden paylaşabilirsin.");
+                window.open('https://www.instagram.com', '_blank');
+            };
+        }
+
+        // KAÇAN HAYIR BUTONU (sürekli kaçış, popup yok)
+        if (isim && soru) {
+            const noBtn = document.getElementById('hayirButton');
+            const yesBtn = document.getElementById('evetButton');
+            const container = document.querySelector('.container');
             
-            // Buton başlangıç pozisyonu relative olarak kalır, JS ile absolute yapacağız ama taşma olmayacak
-            hayirButton.style.position = 'absolute';
-            // İlk konumlandırma: evet butonunun sağında dursun
-            function setInitialNoPosition() {
-                if (!evetButton || !hayirButton) return;
-                const evetRect = evetButton.getBoundingClientRect();
-                const containerRect = document.querySelector('.container').getBoundingClientRect();
-                // Hayır butonunu evetin sağına, aynı hizaya koy
-                let leftPos = evetRect.right + 20;
-                let topPos = evetRect.top;
-                // Ekran sınırları kontrolü (container dışına taşmasın)
-                const maxLeft = containerRect.right - hayirButton.offsetWidth - 10;
+            // Butonları absolute yap
+            noBtn.style.position = 'absolute';
+            noBtn.style.transition = 'left 0.05s linear, top 0.05s linear';
+            
+            // Başlangıç pozisyonu: Evet butonunun sağına
+            function setInitialPosition() {
+                const yesRect = yesBtn.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                let leftPos = yesRect.right + 20;
+                let topPos = yesRect.top;
+                
+                // Sınırları kontrol et
+                const maxLeft = containerRect.right - noBtn.offsetWidth - 10;
                 const minLeft = containerRect.left + 10;
-                if (leftPos > maxLeft) leftPos = maxLeft - 20;
+                const maxTop = containerRect.bottom - noBtn.offsetHeight - 10;
+                const minTop = containerRect.top + 10;
+                
+                if (leftPos > maxLeft) leftPos = maxLeft - 10;
                 if (leftPos < minLeft) leftPos = minLeft + 10;
-                hayirButton.style.left = leftPos + 'px';
-                hayirButton.style.top = topPos + 'px';
+                if (topPos > maxTop) topPos = maxTop;
+                if (topPos < minTop) topPos = minTop;
+                
+                noBtn.style.left = leftPos + 'px';
+                noBtn.style.top = topPos + 'px';
             }
             
-            setTimeout(setInitialNoPosition, 50);
-            window.addEventListener('resize', () => {
-                if (hayirButton.style.position === 'absolute') setInitialNoPosition();
-            });
+            setTimeout(setInitialPosition, 50);
+            window.addEventListener('resize', setInitialPosition);
             
-            // Fare / dokunmatik (touchmove ve touchstart) ile kaçış
-            function moveNoButtonAway(clientX, clientY) {
-                if (!hayirButton) return;
-                const btnRect = hayirButton.getBoundingClientRect();
-                // Butona yaklaşma mesafesi (80px)
-                const distance = 80;
-                // merkez hesapla
+            // Kaçış fonksiyonu - popup YOK, sadece kaçış
+            function escapeFromCursor(clientX, clientY) {
+                if (!noBtn || noBtn.style.display === 'none') return;
+                
+                const btnRect = noBtn.getBoundingClientRect();
                 const btnCenterX = btnRect.left + btnRect.width / 2;
                 const btnCenterY = btnRect.top + btnRect.height / 2;
-                const distToBtn = Math.hypot(clientX - btnCenterX, clientY - btnCenterY);
+                const distance = Math.hypot(clientX - btnCenterX, clientY - btnCenterY);
                 
-                if (distToBtn < distance) {
-                    // Kaçış yönü: imleçten uzaklaş
+                // 100px yaklaşırsa kaç
+                if (distance < 100) {
                     const angle = Math.atan2(clientY - btnCenterY, clientX - btnCenterX);
-                    const escapeX = Math.cos(angle) * 140;
-                    const escapeY = Math.sin(angle) * 140;
+                    // Kaçış miktarı - ne kadar yakınsa o kadar hızlı kaçsın
+                    const escapePower = Math.min(180, 100 + (100 - distance));
+                    const escapeX = Math.cos(angle) * escapePower;
+                    const escapeY = Math.sin(angle) * escapePower;
                     
                     let newLeft = btnRect.left - escapeX;
                     let newTop = btnRect.top - escapeY;
                     
-                    // Ekran / Container sınırlamaları (kaybolmasın, dışarı çıkmasın)
-                    const containerRect = document.querySelector('.container').getBoundingClientRect();
+                    // Container sınırları (ekrandan çıkmasın, kaybolmasın)
+                    const containerRect = container.getBoundingClientRect();
                     const minX = containerRect.left + 5;
-                    const maxX = containerRect.right - hayirButton.offsetWidth - 5;
+                    const maxX = containerRect.right - noBtn.offsetWidth - 5;
                     const minY = containerRect.top + 5;
-                    const maxY = containerRect.bottom - hayirButton.offsetHeight - 5;
+                    const maxY = containerRect.bottom - noBtn.offsetHeight - 5;
                     
                     newLeft = Math.min(maxX, Math.max(minX, newLeft));
                     newTop = Math.min(maxY, Math.max(minY, newTop));
                     
-                    hayirButton.style.left = newLeft + 'px';
-                    hayirButton.style.top = newTop + 'px';
+                    noBtn.style.left = newLeft + 'px';
+                    noBtn.style.top = newTop + 'px';
                 }
             }
             
-            // Mouse hareketi
+            // Mouse takibi
             const onMouseMove = (e) => {
-                if (!hayirButton || hayirButton.style.display === 'none') return;
-                moveNoButtonAway(e.clientX, e.clientY);
+                escapeFromCursor(e.clientX, e.clientY);
             };
             
-            // Dokunmatik cihazlar için (parmak hareketi)
+            // Dokunmatik takibi
             const onTouchMove = (e) => {
-                if (!hayirButton || hayirButton.style.display === 'none') return;
                 const touch = e.touches[0];
                 if (touch) {
-                    moveNoButtonAway(touch.clientX, touch.clientY);
+                    escapeFromCursor(touch.clientX, touch.clientY);
+                }
+            };
+            
+            const onTouchStart = (e) => {
+                const touch = e.touches[0];
+                if (touch) {
+                    escapeFromCursor(touch.clientX, touch.clientY);
                 }
             };
             
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('touchmove', onTouchMove);
-            document.addEventListener('touchstart', (e) => {
-                const touch = e.touches[0];
-                if (touch && hayirButton) moveNoButtonAway(touch.clientX, touch.clientY);
+            document.addEventListener('touchstart', onTouchStart);
+            
+            // Hayır butonuna tıklama girişimi - sadece kaç, popup yok
+            noBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Tıklayınca anında rastgele bir yere kaçsın
+                const containerRect = container.getBoundingClientRect();
+                const randomLeft = containerRect.left + 10 + Math.random() * (containerRect.width - noBtn.offsetWidth - 20);
+                const randomTop = containerRect.top + 10 + Math.random() * (containerRect.height - noBtn.offsetHeight - 20);
+                noBtn.style.left = randomLeft + 'px';
+                noBtn.style.top = randomTop + 'px';
             });
             
-            // BUTONLARIN EVET aksiyonu
-            if (evetButton) {
-                evetButton.addEventListener('click', () => {
-                    if (!cevapParam) return;
-                    const cevapText = decodeURIComponent(cevapParam);
-                    const questionPanelDiv = document.getElementById('questionPanel');
-                    // Güzel bir kutlama mesajı göster
-                    questionPanelDiv.innerHTML = `
-                        <div class="cevap-karti">
-                            <h1 style="color:#2b9348; font-size: 2rem;">🎉 ${cevapText} 🎉</h1>
-                            <p style="margin-top: 20px; font-size: 1.3rem;">Seni çok seviyorum! 💖</p>
-                            <button id="resetBtn" style="background:#ff4d6d; margin-top: 30px;">🔁 Yeni bir sürpriz hazırla</button>
-                        </div>
-                    `;
-                    const resetBtn = document.getElementById('resetBtn');
-                    if (resetBtn) {
-                        resetBtn.addEventListener('click', () => {
-                            window.location.href = window.location.href.split('?')[0];
-                        });
-                    }
-                });
-            }
-            
-            // Hayır butonuna tıklanırsa da kaçsın ama tıklanmaya çalışırsa şaka olsun
-            hayirButton.addEventListener('click', () => {
-                alert("😏 Hayır butonuna asla BASAMAZSIN! Buton çok hızlı kaçar. Sadece EVET'e bas 😘");
-                // ekstra kaçır
-                const containerRect = document.querySelector('.container').getBoundingClientRect();
-                let randomLeft = containerRect.left + Math.random() * (containerRect.width - hayirButton.offsetWidth - 20);
-                let randomTop = containerRect.top + Math.random() * (containerRect.height - hayirButton.offsetHeight - 20);
-                randomLeft = Math.min(containerRect.right - hayirButton.offsetWidth - 5, Math.max(containerRect.left + 5, randomLeft));
-                randomTop = Math.min(containerRect.bottom - hayirButton.offsetHeight - 5, Math.max(containerRect.top + 5, randomTop));
-                hayirButton.style.left = randomLeft + 'px';
-                hayirButton.style.top = randomTop + 'px';
+            // Evet butonu - cevabı göster
+            yesBtn.addEventListener('click', () => {
+                const cevapText = decodeURIComponent(cevap);
+                const panel = document.getElementById('questionPanel');
+                panel.innerHTML = `
+                    <h1 style="color:#2b9348; font-size: 2rem;">🎉 ${cevapText} 🎉</h1>
+                    <button onclick="window.location.href=window.location.href.split('?')[0]" style="margin-top:30px; width:auto; padding:12px 24px;">🔁 Yeni Sürpriz Hazırla</button>
+                `;
             });
         }
-        
-        // Eğer soru paneli aktifse buton kaçış sistemini başlat
-        if (isimParam && soruParam) {
-            // DOM tam yüklendiğinde butonları bul
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initEscapeButton);
-            } else {
-                initEscapeButton();
-            }
-        }
-        
-        // Ayrıca sayfa yeniden boyutlandığında hayır butonunun container dışına çıkmamasını sağla
-        window.addEventListener('resize', () => {
-            if (hayirButton && hayirButton.style.position === 'absolute' && isimParam) {
-                const containerRect = document.querySelector('.container').getBoundingClientRect();
-                let currentLeft = parseFloat(hayirButton.style.left);
-                let currentTop = parseFloat(hayirButton.style.top);
-                if (isNaN(currentLeft)) return;
-                const maxLeft = containerRect.right - hayirButton.offsetWidth - 10;
-                const minLeft = containerRect.left + 10;
-                const maxTop = containerRect.bottom - hayirButton.offsetHeight - 10;
-                const minTop = containerRect.top + 10;
-                if (currentLeft > maxLeft) hayirButton.style.left = maxLeft + 'px';
-                if (currentLeft < minLeft) hayirButton.style.left = minLeft + 'px';
-                if (currentTop > maxTop) hayirButton.style.top = maxTop + 'px';
-                if (currentTop < minTop) hayirButton.style.top = minTop + 'px';
-            }
-        });
     </script>
 </body>
 </html>
